@@ -12,26 +12,26 @@ headers = {
 response = requests.request("GET", url, headers=headers).json()
 
 
-def helloworldview(request):
-    mylist = []
-    noofresult = int(response['results'])
-    for x in range(noofresult):
-        mylist.append(response['response'][x]['country'])
+def covid_tracker_view(request):
+    country_list = []
+    no_of_results = int(response['results'])
+    for x in range(no_of_results):
+        country_list.append(response['response'][x]['country'])
+    country_list.sort()
     if request.method == "POST":
-        selectedcountry = request.POST['selectedcountry']
-        print(selectedcountry)
-        for x in range(0, noofresult):
-            if selectedcountry == response['response'][x]['country']:
-                print(response['response'][x]['cases'])
+        selected_country = request.POST['selected_country']
+
+        for x in range(0, no_of_results):
+            if selected_country == response['response'][x]['country']:
+
                 new = response['response'][x]['cases']['new']
                 active = response['response'][x]['cases']['active']
                 critical = response['response'][x]['cases']['critical']
                 recovered = response['response'][x]['cases']['recovered']
                 total = response['response'][x]['cases']['total']
                 deaths = int(total)-int(active)-int(recovered)
-        context = {'mylist': mylist, 'selectedcountry': selectedcountry, 'new': new, 'active': active, 'critical': critical,
-                   "recovered": recovered, 'total': total, "deaths": deaths}
-
-        return render(request, 'helloworld.html', context)
-    context = {'mylist': mylist}
-    return render(request, 'helloworld.html', context)
+                context = {'country_list': country_list, 'selected_country': selected_country, 'new': new, 'active': active, 'critical': critical,
+                           "recovered": recovered, 'total': total, "deaths": deaths}
+                return render(request, 'covid_tracker.html', context)
+    context = {'country_list': country_list}
+    return render(request, 'covid_tracker.html', context)
