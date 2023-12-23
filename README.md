@@ -6,7 +6,7 @@
 
 1.Clone the repo where you want to keep it.
 
-2.Install the python modules requirments from requirments.txt.
+2.Install the python modules/packages requirments from requirments.txt.
 
 ```
 pip install -r requiremnts.txt
@@ -16,18 +16,14 @@ pip install -r requiremnts.txt
 
 4.Go to [api](https://rapidapi.com/api-sports/api/covid-193) and copy the api key from code snippet for python.
 
-5.In the 'covidapp' folder make a file named 'config.py' and paste key with variable name 'api_key'.
-
-```
-api_key=<Key from snippet>
-```
+5.In the 'covidapp' folder ,in 'config.py' and paste key with variable name 'api_key' or use store key with environment variable with accordingly.
 
 6.Change terminal or cmd path to the directory 'Covid_tracker' folder inside the repo.
 
 7.Run the following command
 
 ```
-pyhton manage.py startserver
+python manage.py runserver
 ```
 
 8.Go to localhost:8000 or 127.0.0.1:8000 at your browser.
